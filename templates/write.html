@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>자기 소개</title>
+</head>
+<body>
+  <h1>자기 소개</h1>
+  <form action="/api/new" method="POST">
+    <label for="name">이름:</label>
+    <input type="text" id="name" name="name_give" required><br><br>
+
+    <label for="mbti">MBTI:</label>
+    <input type="text" id="mbti" name="mbti_give" required><br><br>
+
+    <label for="introduction">자기 소개:</label><br>
+    <textarea id="introduction" name="introduction_give" rows="4" cols="50" required></textarea><br><br>
+
+    <label for="strengths">장점:</label><br>
+    <textarea id="strengths" name="strengths_give" rows="4" cols="50" required></textarea><br><br>
+
+    <label for="collaboration-style">협업 스타일:</label><br>
+    <textarea id="collaboration-style" name="collaboration-style_give" rows="4" cols="50" required></textarea><br><br>
+
+    <label for="blog-url">블로그 주소:</label>
+    <input type="text" id="blog-url" name="blog-url_give" required><br><br>
+
+    <input type="submit" value="저장">
+  </form>
+</body>
+</html>
