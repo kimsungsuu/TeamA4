@@ -13,7 +13,7 @@ def home():
 
 
 @app.route("/api", methods=["GET"])
-def movie_get():
+def home_get():
    all_myself = list(db.myself.find({},{'_id':True, 'name':True, 'mbti':True, 'introduction':True, 
                                          'strengths':True, 'collaboration_style':True ,'blog_url':True}))
     
@@ -48,6 +48,14 @@ def post_write():
     db.myself.insert_one(doc)
 
     return redirect('/')
+ 
+ 
+@app.route("/api/view/<id>", methods=["GET"])
+def find_team(id):
+    
+    find_myself = db.myself.find_one({"_id": ObjectId(id)})
+    
+    return render_template('view.html', myself=find_myself)
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

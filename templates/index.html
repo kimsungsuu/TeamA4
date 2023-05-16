@@ -92,11 +92,12 @@
         });
 
         function listing() {
-            fetch('/').then((res) => res.json()).then((data) => {
+            fetch('/api').then((res) => res.json()).then((data) => {
                 let rows = data['result']
                 $('#cards-box').empty()
                 rows.forEach((a) => {
 
+                    let id = a['_id']
                     let name = a['name']
                     let mbti = a['mbti']
                     let introduction = a['introduction']
@@ -109,7 +110,7 @@
                                         <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
                                             class="card-img-top">
                                         <div class="card-body">
-                                            <h5 class="card-name">${name}</h5>
+                                            <h5 class="card-name"><a href="/api/view/${id}">${name}</a></h5>
                                             <p class="card-myself">${introduction}</p>
                                             <p class="card-mbti">${mbti}</p>
                                             <p class="blog_url">${blog_url}</p>
