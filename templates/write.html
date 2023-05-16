@@ -5,7 +5,11 @@
 </head>
 <body>
   <h1>자기 소개</h1>
-  <form action="/api/new" method="POST">
+  <form action="/api/new" method="POST" enctype="multipart/form-data">
+
+    <label for="photo">이미지 첨부 :</label>
+    <input type="file" id="photo" name="photo_give" required><br><br>
+
     <label for="name">이름:</label>
     <input type="text" id="name" name="name_give" required><br><br>
 
@@ -23,6 +27,9 @@
 
     <label for="blog-url">블로그 주소:</label>
     <input type="text" id="blog-url" name="blog-url_give" required><br><br>
+
+    <label for="github-url">github 주소:</label>
+    <input type="text" id="github-url" name="github-url_give" required><br><br>
 
     <input type="submit" value="저장">
   </form>

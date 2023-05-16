@@ -38,20 +38,19 @@
       </style>
 </head>
 <body>
-    <div class="container">
-        <div class = "image">
-            <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
-            class="card-img-top" style="max-width: 300px; height: auto;">   
-        </div>
-        <div class="description">
-            <h1 class="mytitle">이름 : {{ myself['name'] }}</h1>
-            <p class="mytime">MBTI : {{ myself['mbti'] }}</p>
-            <p class="mytime">자기 소개: {{myself['introduction']}}</p>
-            <p class="mytime">장점 : {{ myself['strengths'] }}</p>
-            <p class="mytime">협업 스타일 : {{ myself['collaboration_style'] }}</p>
-            <p class="mytime">blog_url : {{ myself['blog_url'] }}</p>
-            <button class="mytext" onclick="location.href='/'">목록</button>
-        </div>
+  <div class="container">
+    <div class = "image">
+        <img src="data:image/jpeg;base64,{{ myself['photo'] }}" class="card-img-top" style="max-width: 300px; height: auto;">   
     </div>
+    <div class="description">
+        <h1 class="mytitle">이름 : {{ myself['name'] }}</h1>
+        <p class="mytime">MBTI : {{ myself['mbti'] }}</p>
+        <p class="mytime">자기 소개: {{myself['introduction']}}</p>
+        <p class="mytime">장점 : {{ myself['strengths'] }}</p>
+        <p class="mytime">협업 스타일 : {{ myself['collaboration_style'] }}</p>
+        <p class="mytime">blog_url : {{ myself['blog_url'] }}</p>
+        <button class="mytext" onclick="location.href='/'">목록</button>
+    </div>
+</div>
 </body>
 </html>
