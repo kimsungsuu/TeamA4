@@ -46,6 +46,8 @@ def get_write():
 
 @app.route("/api/new", methods=["POST"])
 def post_write():
+       
+    video_receive = request.files['video_give']   
     photo_receive = request.files['photo_give']
     name_receive = request.form['name_give']
     mbti_receive = request.form['mbti_give']
@@ -56,8 +58,10 @@ def post_write():
     github_receive = request.form['github-url_give']
 
     file_img_id = fs.put(photo_receive)
+    file_video_id = fs.put(video_receive)
     
     doc = {
+       'video' : file_video_id,
        'photo' : file_img_id,
        'name' : name_receive,
        'mbti' : mbti_receive,
@@ -65,7 +69,7 @@ def post_write():
        'strengths' : strengths_receive,
        'collaboration_style' : collaboration_style_receive,
        'blog_url' : blog_url_receive,
-       'github_url' : github_receive
+       'github_url' : github_receive,
     }
     
     db.myself.insert_one(doc)
@@ -79,8 +83,10 @@ def find_team(id):
     find_myself = db.myself.find_one({"_id": ObjectId(id)})
         
     photo_id = find_myself['photo']
+    video_id = find_myself['video']
     
     print('find_myself = ', find_myself['photo'])
+    
     print(photo_id)
       
     if photo_id:
@@ -90,6 +96,14 @@ def find_team(id):
               find_myself['photo'] = 'data:image/jpeg;base64,' + base64_img
          except gridfs.error.NoFile as e:
               print.error("파일이 없습니다.")
+              
+    if video_id:
+         try:
+              video_data = fs.get(video_id).read()
+              base64_video = base64.b64encode(video_data).decode('utf-8')
+              find_myself['video'] = 'data:video/jpeg;base64,' + base64_video
+         except gridfs.error.NoFile as e:
+              print.error("파일이 없습니다.")          
     
     find_myself['photo'] = str(find_myself['photo'])
 
