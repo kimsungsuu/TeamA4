@@ -77,6 +77,22 @@ def post_write():
 def find_team(id):
     
     find_myself = db.myself.find_one({"_id": ObjectId(id)})
+        
+    photo_id = find_myself['photo']
+    
+    print('find_myself = ', find_myself['photo'])
+    print(photo_id)
+      
+    if photo_id:
+         try:
+              image_data = fs.get(photo_id).read()
+              base64_img = base64.b64encode(image_data).decode('utf-8')
+              find_myself['photo'] = 'data:image/jpeg;base64,' + base64_img
+         except gridfs.error.NoFile as e:
+              print.error("파일이 없습니다.")
+    
+    find_myself['photo'] = str(find_myself['photo'])
+
     
     return render_template('view.html', myself=find_myself)
 
