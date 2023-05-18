@@ -1,62 +1,271 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>상세 페이지</title>
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <title></title>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
     <style>
-        html, body {
-          height: 100%;
-          margin: 0;
+        .title {
+            text-align: center;
+            padding: 20px;
         }
-    
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
         .container {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
-            text-align: center; /* 이미지 및 설명을 가로로 중앙에 위치시키는 방법 추가 */
-          }
-    
-          .image {
+            /* 이미지 및 설명을 가로로 중앙에 위치시키는 방법 추가 */
+        }
+        .image {
             max-width: 30%;
-            margin-left: 10px; /* 좌측 마진을 조정합니다. */
-            margin-right: 10px; /* 우측 마진을 조정합니다. */
-          }
-        
+            margin-left: 10px;
+            /* 좌측 마진을 조정합니다. */
+            margin-right: 10px;
+            /* 우측 마진을 조정합니다. */
+        }
         .image img {
-          max-width: 100%;
-          height: auto;
+            max-width: 100%;
+            height: auto;
         }
-    
         .description {
-          max-width: 70%;
-          padding-left: 20px;
+            max-width: 70%;
+            padding-left: 20px;
         }
-      </style>
+        .pr1 {
+            background-color: green;
+        }
+        .hide {
+            display: none;
+        }
+        .mytext {
+            border-color: black;
+            background-color: white;
+            border-radius: 10px;
+            font-size: 20px;
+            transition: all 0.4s;
+        }
+        
+        .video-container {
+          width: 100%; 
+          max-width: 1200px; 
+        
+        }
+
+
+        .video-container p{
+          font-size : 50px;
+        }
+
+        .section{
+            margin-top : 70px;
+        }
+
+        .section input[id*="slide"]{
+            display:none; /* 화면에서 radio 안보이게 */
+        }
+
+        .section .slidewrap{
+            max-width : 1200px;
+            margin:0 auto; /*요소의 위쪽과 아래쪽 여백을 0으로 설정하고, 좌우 여백은 자동으로 설정. 
+                            이로 인해 요소는 수평 가운데에 위치하게 된다*/
+            overflow:hidden; /*요소의 내부 컨텐츠가 너무 크거나 요소의 영역을 벗어나는 경우, 넘치는 부분을 자르고 보이지 않게 합니다.*/
+        }
+
+        .section .slidelist{
+            white-space:nowrap; /*요소내 자동 줄바꿈을 방지한다. 텍스트나 이미지가 요소를 뚫고 지나간다.*/
+            font-size:0; /*시각적 요소만 보여주고 싶을 때 사용, ex ) 이미지 슽라이드*/
+        }
+
+        .section .slidelist > li{
+            display:Inline-block; 
+            /*inline : 텍스트나 인라인 요소들이 한 줄에 연속적으로 표시되는 특성, 너비와 높이를 설정할 수 없다. 
+            block : 개별적인 블록을 형성하고 너비와 높이를 설정할 수 있다. 정리하자면 한 줄에 연속적으로 표시되면서도 너비와 높이를 설정할 수 있는 요소로 사용
+            인라인 블록 요소로 요소들을 가로로 배열할 수 있고 너비와 높이를 설정하여 원하는 디자인을 구성할 수 있다.*/
+            vertical-align:middle; /*수직 가운데 정렬*/
+            width:100%; /*요소가 부모 요소의 너비를 가득 채우게 된다. 즉, 이미지가 블록을 가득 채워서 다른 이미지가 보이지 않는다.*/
+            transition:all .5s; /*요소에 전환 효과를 추가하여 애니메이션처럼 보이게할 수 있다.*/
+        }
+
+        .section .slidelist > li > a{
+            display:block; /*요소들이 블록 요소로 표시되며, 너비와 높이에 따라서 자동으로 줄바꿈이 발생 */
+            position:relative; 
+        }
+        
+        .section .slidelist > li > a img{
+            width:100%;
+        }
+
+        .section .slidelist label{
+            position:absolute; /*절대적 위치*/
+            z-index:10; /*다른 요소들 보다 상위에 위치하게 하여 prev, next와 같은 버튼을 
+            이미지 위에서 클릭할 수 있도록 하기 위함*/
+            top:50%; /*상단 위치를 부모 요소의 50%로 설정*/
+            transform:translateY(-50%);
+            padding:50px;
+            cursor:pointer; /*마우스 갖다 대면 마우스가 포인터로 변경 */
+        }
+
+        .section .slidelist .left{
+            left:30px;
+            background:url('https://www.shutterstock.com/image-illustration/red-arrows-white-background-check-600w-2023757117.jpg') center center / 100% no-repeat;
+        }
+
+        .section .slidelist .right{
+            right:30px;
+            background:url('https://www.shutterstock.com/image-illustration/arrow-sign-pointing-go-right-600w-2208597171.jpg') center center / 100% no-repeat;
+        }
+
+        .section [id="slide01"]:checked ~ .slidewrap .slidelist > li {transform:translateX(0%)}
+        .section [id="slide02"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-100%)}
+        .section [id="slide03"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-200%)}
+        .section [id="slide04"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-300%)}
+        
+
+        .introducefood{
+            margin : 100px;
+            display:inline-block;
+            width:1700px;
+        }
+
+        .introducefood > p{
+            font-size:50px;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            setting();
+        })
+        function setting(){
+            let a = $('#name').text();
+            console.log(a);
+        }
+        function edit_box() {
+            popupWindow = window.open("/edit.html", "title", "resizeable");
+            popupWindow.resizeTo(430, 1050);
+            popupWindow.onresize = (_ => {
+                popupWindow.resizeTo(430, 1050);
+            })
+        }
+
+    </script>
 </head>
 <body>
-  <div class="container">
-    <div class = "image">
-      <img src="{{ myself['photo'] }}" class="card-img-top" style="max-width: 300px; height: auto;">
+    <div class="title">
+        <a href="/"><img src="https://blog.kakaocdn.net/dn/C9tc8/btsgfqWbd5E/JHJCNdq1kiBtlM7MgxwfT0/img.png" width="120"
+                height="150"></a> <a href="/"><img
+                src="https://blog.kakaocdn.net/dn/rGKiN/btsf6FOokeB/yn0up2kIAvfC7E0TGkDlxK/img.jpg" width="360"
+                height="80"></a>
     </div>
-    <div class="description">
-        <h1 class="mytitle">이름 : {{ myself['name'] }}</h1>
-        <p class="mytime">MBTI : {{ myself['mbti'] }}</p>
-        <p class="mytime">자기 소개: {{myself['introduction']}}</p>
-        <p class="mytime">장점 : {{ myself['strengths'] }}</p>
-        <p class="mytime">협업 스타일 : {{ myself['collaboration_style'] }}</p>
-        <p class="mytime">blog_url : {{ myself['blog_url'] }}</p>
-        <button class="mytext" onclick="location.href='/'">목록</button>
+    <div class="container">
+        <div class="image">
+            <img src="{{myself['photo']}}" class="card-img-top" style="max-width: 300px; height: auto;">
+        </div>
+        <div class="description">
+            <h1 class="mytitle" >이름 : {{ myself['name'] }}</h1>
+            <textarea id="name" class="hide">{{ myself['name'] }}</textarea>
+            <p class="mytime">MBTI : {{ myself['mbti'] }}</p>
+            <p class="mytime">자기 소개: {{myself['introduce']}}</p>
+            <p class="mytime">장점 : {{ myself['merits_demerits'] }}</p>
+            <p class="mytime">협업 스타일 : {{ myself['style'] }}</p>
+            <p class="mytime">blog_url : {{ myself['blog'] }}</p></a>
+            <p class="mytime">github_url : {{ myself['github'] }}</p>
+            <button class="mytext" type="button" onclick=edit_box()>수정하기</button>
+            <button class="mytext" type="button" onclick="location.href='/'">목록</button>
+        </div>
     </div>
- </div>
- <div>
-  <video controls>
-    <source src="{{ myself.video }}" type="video/mp4">
-</video>
+    
+     <div class = "video-container">
+    <iframe id="inlineFrameExample"
+    title="Inline Frame Example"
+    width="1200"
+    height="600"
+    src="https://tv.kakao.com/v/438112368">
+    </iframe>
+      <p>공부하다가 스트레스 받거나, 우울할 때 이 영상을 찾아봅니다. 😂😂</p>
+    </div> 
 
- 
+
+
+    <div class = "section">
+        <input type="radio" name="slide" id="slide01" checked>
+        <input type="radio" name="slide" id="slide02" >
+        <input type="radio" name="slide" id="slide03" >
+        <input type="radio" name="slide" id="slide04" >
+
+        <div class="slidewrap">
+            <ul class="slidelist">
+                <li>
+                    <a>
+                        <label for="slide04" class="left"></label>
+                        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcaLXLY%2FbtsgpX7fRFA%2FgWlVlrJ3DLofZM1uq72451%2Fimg.jpg">
+                        <label for="slide02" class="right"></label>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <label for="slide01" class="left"></label>
+                        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdbVtus%2FbtsglOjefOI%2FxIwt33MHudEGWesTIvkFK0%2Fimg.jpg">
+                        <label for="slide03" class="right"></label>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <label for="slide02" class="left"></label>
+                        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FPczTo%2FbtsgkYml8pC%2F8CG5jva0KtpIBp0IiVgGd1%2Fimg.jpg">
+                        <label for="slide04" class="right"></label>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <label for="slide03" class="left"></label>
+                        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcfUWTW%2FbtsglPvHCeF%2FeWRMoo4HO382M62HEhkKK1%2Fimg.jpg">
+                        <label for="slide01" class="right"></label>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="introducefood">
+        <p>위 슬라이드 사진들은 제가 좋아하는 음식들입니다.</p>
+        
+        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcaLXLY%2FbtsgpX7fRFA%2FgWlVlrJ3DLofZM1uq72451%2Fimg.jpg" width="500" >
+        <p>피자를 좋아하시는 분들은 지금 정말 군침이 돌겠네요.. 저는 어렸을 때부터 피자를 좋아했고 지금도 즐겨먹고 있습니다. 그런데, 나이가 먹어가면서 술을 먹다보니 <strong>요즘엔 얼~큰한게 땡기네요....</strong></P>
+         
+        <br><br><br><br><br><br>    
+
+
+        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdbVtus%2FbtsglOjefOI%2FxIwt33MHudEGWesTIvkFK0%2Fimg.jpg" width="500" >
+        <p>평범한 순두부찌개이지만 제게는 좋은 추억이 담겨있는 음식입니다. 친구들과 갑작스럽게 바다여행을 가는 날 휴게소에서 첫끼니였거든요! 맛도 엄청 좋았습니다</P>    
+
+            <br><br><br><br><br><br>
+
+        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FPczTo%2FbtsgkYml8pC%2F8CG5jva0KtpIBp0IiVgGd1%2Fimg.jpg" width="500" >
+        <p>아.. 육회네요 ! 육회는 항상 맛있죠..! 육회 먹고싶네요ㅠㅠ</P>    
+         
+        
+            <br><br><br><br><br><br>
+
+        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcfUWTW%2FbtsglPvHCeF%2FeWRMoo4HO382M62HEhkKK1%2Fimg.jpg" width="500" >
+        <p>가족들과 감자탕 먹으러 갔을 때 찍은 사진이네요. 이 집 량이 많아서 아주 좋습니다..</P>    
+                 
+            
+    </div>
 </body>
 </html>
